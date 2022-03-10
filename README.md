@@ -1,0 +1,1 @@
+# docker-swamid-metadata-sp
