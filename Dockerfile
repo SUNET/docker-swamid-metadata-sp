@@ -19,6 +19,7 @@ ADD shibd.logger /etc/shibboleth/shibd.logger
 RUN a2ensite default-ssl && \
 	mkdir -p /etc/shibboleth/certs /etc/shibboleth/metadata /var/cache/shibboleth/metadata && \
 	chown _shibd /etc/shibboleth/metadata /var/cache/shibboleth/metadata && \
-	chmod a+rx /start.sh
+	chmod a+rx /start.sh && \
+	sed -i 's/default_bits=3072/default_bits=4096/' /usr/sbin/shib-keygen
 EXPOSE 443
 ENTRYPOINT ["/start.sh"]
