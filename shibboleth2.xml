@@ -27,6 +27,11 @@
                 <SessionInitiator type="SAML2" defaultACSIndex="1" template="bindingTemplate.html"/>
                 <SessionInitiator type="SAMLDS" URL="https://service.seamlessaccess.org/ds/"/>
             </SessionInitiator>
+            <!-- Seamless Access beta-->
+            <SessionInitiator type="Chaining" Location="/DS/thiss.io" id="seamless-access-beta">
+                <SessionInitiator type="SAML2" defaultACSIndex="1" template="bindingTemplate.html"/>
+                <SessionInitiator type="SAMLDS" URL="https://use.thiss.io/ds/"/>
+            </SessionInitiator>
         </Sessions>
 
         <Errors supportContact="${SP_CONTACT}"
