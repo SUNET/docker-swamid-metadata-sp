@@ -11,7 +11,7 @@
 
         <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
             redirectLimit="exact"
-            checkAddress="false" handlerSSL="false" cookieProps="http" sameSiteFallback="true">
+            checkAddress="false" handlerSSL="true" cookieProps="https" sameSiteFallback="true">
 
             <SSO discoveryProtocol="SAMLDS" discoveryURL="https://service.seamlessaccess.org/ds/"> SAML2 </SSO>
 
@@ -24,12 +24,12 @@
 
             <!-- Seamless Access -->
             <SessionInitiator type="Chaining" Location="/DS/seamless-access" id="seamless-access">
-                <SessionInitiator type="SAML2" defaultACSIndex="1" template="bindingTemplate.html"/>
+                <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
                 <SessionInitiator type="SAMLDS" URL="https://service.seamlessaccess.org/ds/"/>
             </SessionInitiator>
             <!-- Seamless Access beta-->
             <SessionInitiator type="Chaining" Location="/DS/thiss.io" id="seamless-access-beta">
-                <SessionInitiator type="SAML2" defaultACSIndex="1" template="bindingTemplate.html"/>
+                <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
                 <SessionInitiator type="SAMLDS" URL="https://use.thiss.io/ds/"/>
             </SessionInitiator>
         </Sessions>
@@ -44,18 +44,14 @@
 
             <MetadataFilter type="RequireValidUntil" maxValidityInterval="2419200"/>
             <MetadataFilter type="Signature" certificate="md-signer2.crt" verifyBackup="false"/>
-            <DiscoveryFilter type="Blacklist" matcher="EntityAttributes" trimTags="true"
-                attributeName="http://macedir.org/entity-category"
-                attributeNameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri"
-                attributeValue="http://refeds.org/category/hide-from-discovery" />
         </MetadataProvider>
 
         <AttributeExtractor type="XML" validate="true" reloadChanges="false" path="attribute-map.xml"/>
 
         <!-- Extracts support information for IdP from its metadata. -->
         <AttributeExtractor type="Metadata" errorURL="errorURL" DisplayName="displayName"
-                        InformationURL="informationURL" PrivacyStatementURL="privacyStatementURL"
-                        OrganizationURL="organizationURL">
+            InformationURL="informationURL" PrivacyStatementURL="privacyStatementURL"
+            OrganizationURL="organizationURL">
             <ContactPerson id="Support-Administrative"  contactType="administrative" formatter="$EmailAddress" />
             <ContactPerson id="Support-Contact"  contactType="support" formatter="$EmailAddress" />
             <ContactPerson id="Support-Technical"  contactType="technical" formatter="$EmailAddress" />
