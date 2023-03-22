@@ -50,7 +50,7 @@
 
         <!-- Extracts support information for IdP from its metadata. -->
         <AttributeExtractor type="Metadata" errorURL="errorURL" DisplayName="displayName"
-            InformationURL="informationURL" PrivacyStatementURL="privacyStatementURL"
+            InformationURL="informationURL" PrivacyStatementURL="privacyStatementURL"  registrationAuthority="registrationAuthority"
             OrganizationURL="organizationURL">
             <ContactPerson id="Support-Administrative"  contactType="administrative" formatter="$EmailAddress" />
             <ContactPerson id="Support-Contact"  contactType="support" formatter="$EmailAddress" />

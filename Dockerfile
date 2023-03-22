@@ -17,6 +17,7 @@ ADD default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 ADD start.sh /start.sh
 ADD shibd.logger /etc/shibboleth/shibd.logger
 RUN a2ensite default-ssl && \
+	sed -i 's/Options Indexes/Options/' /etc/apache2/apache2.conf && \
 	mkdir -p /etc/shibboleth/certs /etc/shibboleth/metadata /var/cache/shibboleth/metadata && \
 	chown _shibd /etc/shibboleth/metadata /var/cache/shibboleth/metadata && \
 	chmod a+rx /start.sh && \
