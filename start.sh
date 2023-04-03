@@ -15,7 +15,7 @@ if [ "x${SP_ABOUT}" = "x" ]; then
 fi
 
 if [ "x${SP_METADATAFEED}" = "x" ]; then
-   SP_METADATAFEED="http://mds.swamid.se/md/swamid-idp.xml"
+   SP_METADATAFEED="http://mds.swamid.se/"
 fi
 
 if [ "x${DEFAULT_LOGIN}" = "x" ]; then
