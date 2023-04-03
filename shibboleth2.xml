@@ -44,14 +44,6 @@
             <MetadataFilter type="RequireValidUntil" maxValidityInterval="2419200"/>
         </MetadataProvider>
 
-        <MetadataProvider type="XML" validate="true"
-            url="${SP_METADATAFEED}"
-            backingFilePath="metadata/swamid-1.0.xml" maxRefreshDelay="7200">
-
-            <MetadataFilter type="RequireValidUntil" maxValidityInterval="2419200"/>
-            <MetadataFilter type="Signature" certificate="md-signer2.crt" verifyBackup="false"/>
-        </MetadataProvider>
-
         <AttributeExtractor type="XML" validate="true" reloadChanges="false" path="attribute-map.xml"/>
 
         <!-- Extracts support information for IdP from its metadata. -->
