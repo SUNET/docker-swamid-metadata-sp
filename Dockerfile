@@ -12,7 +12,7 @@ ENV DEFAULT_LOGIN seamless-access
 ADD md-signer2.crt /etc/shibboleth/md-signer2.crt
 ADD shibboleth2.xml /tmp/shibboleth2.xml
 ADD attribute-map.xml /etc/shibboleth/attribute-map.xml
-ADD default-ssl.conf /etc/apache2/sites-available/default-ssl.conf 
+ADD default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 ADD start.sh /start.sh
 ADD shibd.logger /etc/shibboleth/shibd.logger
 RUN a2ensite default-ssl && \
