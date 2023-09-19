@@ -7,7 +7,7 @@ RUN apt-get -q update && \
 ENV SP_HOSTNAME sp.example.com
 ENV SP_CONTACT noc@sunet.se
 ENV SP_ABOUT /about.html
-ENV SP_METADATAFEED http://mds.swamid.se/
+ENV SP_METADATAFEED https://mds.swamid.se/
 ENV DEFAULT_LOGIN seamless-access
 ADD md-signer2.crt /etc/shibboleth/md-signer2.crt
 ADD shibboleth2.xml /tmp/shibboleth2.xml
