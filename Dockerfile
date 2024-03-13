@@ -2,7 +2,7 @@ FROM debian:bullseye
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt-get -q update && \
 	apt-get -y upgrade && \
-	apt-get -y install apache2 libapache2-mod-shib libapache2-mod-php php-mysql php-xml php-curl gettext-base git augeas-tools sqlite3 && \
+	apt-get -y install apache2 libapache2-mod-shib libapache2-mod-php php-mysql php-xml php-curl gettext-base git augeas-tools php-sqlite3 && \
 	a2enmod ssl headers
 ENV SP_HOSTNAME sp.example.com
 ENV SP_CONTACT noc@sunet.se
