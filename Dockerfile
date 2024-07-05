@@ -31,5 +31,12 @@ RUN a2ensite default-ssl && \
 	chown _shibd /etc/shibboleth/metadata /var/cache/shibboleth/metadata && \
 	chmod a+rx /start.sh && \
 	sed -i 's/default_bits=3072/default_bits=4096/' /usr/sbin/shib-keygen
+
+# Output to stdout for better handling in a container environment
+RUN ln -sf /proc/self/fd/1 /var/log/shibboleth/shibd.log
+RUN ln -sf /proc/self/fd/1 /var/log/shibboleth/shibd_warn.log
+RUN ln -sf /proc/self/fd/1 /var/log/shibboleth/signature.log
+RUN ln -sf /proc/self/fd/1 /var/log/shibboleth/transaction.log
+
 EXPOSE 443
 ENTRYPOINT ["/start.sh"]
