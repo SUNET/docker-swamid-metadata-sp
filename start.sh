@@ -2,30 +2,12 @@
 
 printenv
 
-if [ "x${SP_HOSTNAME}" = "x" ]; then
-   SP_HOSTNAME="`hostname`"
-fi
-
-if [ "x${SP_CONTACT}" = "x" ]; then
-   SP_CONTACT="info@${SP_HOSTNAME}"
-fi
-
-if [ "x${SP_ABOUT}" = "x" ]; then
-   SP_ABOUT="/about"
-fi
-
-if [ "x${SP_METADATAFEED}" = "x" ]; then
-   SP_METADATAFEED="http://mds.swamid.se/"
-fi
-
-if [ "x${DEFAULT_LOGIN}" = "x" ]; then
-   DEFAULT_LOGIN="seamless-access" 
-fi
-
 export KEYDIR=/etc/shibboleth/certs
 if [ ! -f "$KEYDIR/sp-signing-key.pem" -o ! -f "$KEYDIR/sp-encrypt-key.pem" ]; then
 	shib-keygen -o $KEYDIR -n sp-signing
 	shib-keygen -o $KEYDIR -n sp-encrypt
+else
+	chown _shibd:_shibd $KEYDIR/sp-encrypt-cert.pem $KEYDIR/sp-encrypt-key.pem $KEYDIR/sp-signing-cert.pem $KEYDIR/sp-signing-key.pem
 fi
 
 envsubst < /tmp/shibboleth2.xml > /etc/shibboleth/shibboleth2.xml
@@ -37,6 +19,20 @@ defvar si /files/etc/shibboleth/shibboleth2.xml/SPConfig/ApplicationDefaults/Ses
 set \$si/#attribute/isDefault "true"
 EOF
 
+if [ ! "x${SP_ERROR}" = "x" ]; then
+augtool -s --noautoload --noload <<EOF
+set /augeas/load/xml/lens "Xml.lns"
+set /augeas/load/xml/incl "/etc/shibboleth/shibboleth2.xml"
+load
+defvar si /files/etc/shibboleth/shibboleth2.xml/SPConfig/ApplicationDefaults/Errors
+set \$si/#attribute/redirectErrors "${SP_ERROR}"
+EOF
+fi
+
+if [ -f /var/www/html/composer.json -a ! -d /var/www/html/vendor ]; then
+	cd /var/www/html/
+	composer install
+fi
 
 echo "----"
 cat /etc/shibboleth/shibboleth2.xml
