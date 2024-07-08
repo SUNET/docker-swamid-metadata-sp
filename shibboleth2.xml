@@ -27,10 +27,20 @@
                 <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
                 <SessionInitiator type="SAMLDS" URL="https://service.seamlessaccess.org/ds/"/>
             </SessionInitiator>
-            <!-- Seamless Access beta-->
+            <!-- Seamless Access beta -->
             <SessionInitiator type="Chaining" Location="/DS/thiss.io" id="seamless-access-beta">
                 <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
                 <SessionInitiator type="SAMLDS" URL="https://use.thiss.io/ds/"/>
+            </SessionInitiator>
+            <!-- SWAMID QA -->
+            <SessionInitiator type="Chaining" Location="/DS/swamid-qa" id="swamid-qa">
+                <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
+                <SessionInitiator type="SAMLDS" URL="https://ds.qa.swamid.se/ds/"/>
+            </SessionInitiator>
+            <!-- FIDUS -->
+            <SessionInitiator type="Chaining" Location="/DS/fidus" id="fidus">
+                <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
+                <SessionInitiator type="SAMLDS" URL="https://ds.fidus.skolverket.se/ds/"/>
             </SessionInitiator>
         </Sessions>
 
@@ -38,9 +48,9 @@
             helpLocation="${SP_ABOUT}"
             styleSheet="/shibboleth-sp/main.css"/>
 
-        <MetadataProvider type="MDQ" id="mdq.swamid.se" ignoreTransport="true" cacheDirectory="mdq.swamid.se"
+        <MetadataProvider type="MDQ" id="mdq" ignoreTransport="true" cacheDirectory="mdq"
 		    baseUrl="${SP_METADATAFEED}">
-            <MetadataFilter type="Signature" certificate="md-signer2.crt"/>
+            <MetadataFilter type="Signature" certificate="${SP_METADATACERT}"/>
             <MetadataFilter type="RequireValidUntil" maxValidityInterval="2419200"/>
         </MetadataProvider>
 
