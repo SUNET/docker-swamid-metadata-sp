@@ -35,11 +35,5 @@ RUN a2ensite default-ssl && \
 	sed -i 's/default_bits=3072/default_bits=4096/' /usr/sbin/shib-keygen && \
 	mv /etc/shibboleth/shibboleth2.xml /etc/shibboleth/shibboleth2.xml.org
 
-# Output to stdout for better handling in a container environment
-RUN ln -sf /proc/self/fd/1 /var/log/shibboleth/shibd.log
-RUN ln -sf /proc/self/fd/1 /var/log/shibboleth/shibd_warn.log
-RUN ln -sf /proc/self/fd/1 /var/log/shibboleth/signature.log
-RUN ln -sf /proc/self/fd/1 /var/log/shibboleth/transaction.log
-
 EXPOSE 443
 ENTRYPOINT ["/start.sh"]
