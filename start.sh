@@ -43,7 +43,7 @@ if [ ! -f "/etc/dehydrated/cert.pem" -o ! -f "/etc/dehydrated/privkey.pem" ]; th
 	echo "Can't find cert.pem and privkey.pem in /etc/dehydrated"
 fi
 
-service shibd start &
+/usr/sbin/shibd -f -c /etc/shibboleth/shibboleth2.xml -p /run/shibboleth/shibd.pid -w 30
 rm -f /var/run/apache2/apache2.pid
 
 env APACHE_LOCK_DIR=/var/lock/apache2 APACHE_RUN_DIR=/var/run/apache2 APACHE_PID_FILE=/var/run/apache2/apache2.pid APACHE_RUN_USER=www-data APACHE_RUN_GROUP=www-data APACHE_LOG_DIR=/var/log/apache2 apache2 -DFOREGROUND
