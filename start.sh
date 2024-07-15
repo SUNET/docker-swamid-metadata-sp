@@ -46,7 +46,7 @@ fi
 #mkdir -p /run/shibboleth
 #/usr/sbin/shibd -f -c /etc/shibboleth/shibboleth2.xml -p /run/shibboleth/shibd.pid -w 30
 mkfifo -m 600 /tmp/logpipe-shib
-cat <> /tmp/logpipe-shib 1>&2 &
+unbuffer cat /tmp/logpipe-shib &
 
 service shibd start
 

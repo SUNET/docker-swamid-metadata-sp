@@ -3,7 +3,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 RUN apt-get -q update && \
 	apt-get -y upgrade && \
 	apt-get -y install apache2 libapache2-mod-shib libapache2-mod-php php-mysql php-xml php-curl gettext-base git augeas-tools sqlite3 php-sqlite3 composer locales-all && \
-	a2enmod ssl headers
+	a2enmod ssl headers expect
 
 # Disable apache default site and port 80
 RUN a2dissite 000-default
