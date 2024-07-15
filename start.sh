@@ -43,6 +43,7 @@ if [ ! -f "/etc/dehydrated/cert.pem" -o ! -f "/etc/dehydrated/privkey.pem" ]; th
 	echo "Can't find cert.pem and privkey.pem in /etc/dehydrated"
 fi
 
+mkdir -p /run/shibboleth
 /usr/sbin/shibd -f -c /etc/shibboleth/shibboleth2.xml -p /run/shibboleth/shibd.pid -w 30
 rm -f /var/run/apache2/apache2.pid
 
