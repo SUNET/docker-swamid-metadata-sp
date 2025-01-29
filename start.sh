@@ -29,9 +29,14 @@ set \$si/#attribute/redirectErrors "${SP_ERROR}"
 EOF
 fi
 
-if [ -f /var/www/html/composer.json -a ! -d /var/www/html/vendor ]; then
+if [ -f /var/www/html/composer.json ]; then
 	cd /var/www/html/
-	composer install
+	if [ ! -d /var/www/html/vendor ]; then
+		composer install
+	fi
+	if [ composer.json -nt composer.lock ]; then
+		composer update
+	fi
 fi
 
 echo "----"
