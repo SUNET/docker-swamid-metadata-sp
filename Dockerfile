@@ -33,6 +33,7 @@ RUN a2ensite default-ssl && \
 	chown _shibd /etc/shibboleth/metadata /var/cache/shibboleth/metadata && \
 	chmod a+rx /start.sh && \
 	sed -i 's/default_bits=3072/default_bits=4096/' /usr/sbin/shib-keygen && \
+	sed -i 's@<\(Binding.*path="/SAML2/POST-SimpleSign" /\)>@<!--\1-->@' /etc/shibboleth/protocols.xml && \
 	mv /etc/shibboleth/shibboleth2.xml /etc/shibboleth/shibboleth2.xml.org
 
 EXPOSE 443
