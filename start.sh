@@ -31,12 +31,7 @@ fi
 
 if [ -f /var/www/html/composer.json ]; then
 	cd /var/www/html/
-	if [ ! -d /var/www/html/vendor ]; then
-		composer install
-	fi
-	if [ composer.json -nt composer.lock ]; then
-		composer update
-	fi
+	composer install
 fi
 
 echo "----"
