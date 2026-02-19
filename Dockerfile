@@ -12,6 +12,7 @@ RUN echo "Listen 443" > /etc/apache2/ports.conf
 
 # Output to stderr/stdout for better handling in a container environment
 RUN sed -i 's#ErrorLog ${APACHE_LOG_DIR}/error.log#ErrorLog /dev/stderr#g' /etc/apache2/apache2.conf
+RUN echo 'LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\""'  >> /etc/apache2/apache2.conf
 RUN echo 'TransferLog /dev/stdout'  >> /etc/apache2/apache2.conf
 
 ENV SP_HOSTNAME sp.example.org
