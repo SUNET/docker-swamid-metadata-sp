@@ -1,4 +1,4 @@
-FROM debian:bookworm
+FROM debian:trixie
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt-get -q update && \
 	apt-get -y upgrade && \
@@ -15,12 +15,13 @@ RUN sed -i 's#ErrorLog ${APACHE_LOG_DIR}/error.log#ErrorLog /dev/stderr#g' /etc/
 RUN echo 'LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\""'  >> /etc/apache2/apache2.conf
 RUN echo 'TransferLog /dev/stdout'  >> /etc/apache2/apache2.conf
 
-ENV SP_HOSTNAME sp.example.org
-ENV SP_CONTACT noc@sunet.se
-ENV SP_ABOUT /about.html
-ENV SP_METADATAFEED https://mds.swamid.se/
-ENV SP_METADATACERT md-signer2.crt
-ENV DEFAULT_LOGIN seamless-access
+ENV SP_HOSTNAME=sp.example.org
+ENV SP_CONTACT=noc@sunet.se
+ENV SP_ABOUT=/about.html
+ENV SP_METADATAFEED=https://mds.swamid.se/
+ENV SP_METADATACERT=md-signer2.crt
+ENV DEFAULT_LOGIN=seamless-access
+ENV EXTRA_DS_PARAMS=""
 ADD md-signer2.crt /etc/shibboleth/md-signer2.crt
 ADD swamid-qa.crt /etc/shibboleth/swamid-qa.crt
 ADD shibboleth2.xml /tmp/shibboleth2.xml

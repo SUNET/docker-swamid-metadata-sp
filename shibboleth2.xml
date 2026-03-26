@@ -13,7 +13,7 @@
             redirectLimit="exact"
             checkAddress="false" handlerSSL="true" cookieProps="https" sameSiteFallback="true">
 
-            <SSO discoveryProtocol="SAMLDS" discoveryURL="https://service.seamlessaccess.org/ds/"> SAML2 </SSO>
+            <SSO discoveryProtocol="SAMLDS" discoveryURL="https://service.seamlessaccess.org/ds/${EXTRA_DS_PARAMS}"> SAML2 </SSO>
 
             <Logout>SAML2 Local</Logout>
             <LogoutInitiator type="Admin" Location="/Logout/Admin" acl="127.0.0.1 ::1" />
@@ -25,22 +25,22 @@
             <!-- Seamless Access -->
             <SessionInitiator type="Chaining" Location="/DS/seamless-access" id="seamless-access">
                 <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
-                <SessionInitiator type="SAMLDS" URL="https://service.seamlessaccess.org/ds/"/>
+                <SessionInitiator type="SAMLDS" URL="https://service.seamlessaccess.org/ds/${EXTRA_DS_PARAMS}"/>
             </SessionInitiator>
             <!-- Seamless Access beta -->
             <SessionInitiator type="Chaining" Location="/DS/thiss.io" id="seamless-access-beta">
                 <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
-                <SessionInitiator type="SAMLDS" URL="https://use.thiss.io/ds/"/>
+                <SessionInitiator type="SAMLDS" URL="https://use.thiss.io/ds/${EXTRA_DS_PARAMS}"/>
             </SessionInitiator>
             <!-- SWAMID QA -->
             <SessionInitiator type="Chaining" Location="/DS/swamid-qa" id="swamid-qa">
                 <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
-                <SessionInitiator type="SAMLDS" URL="https://ds.qa.swamid.se/ds/"/>
+                <SessionInitiator type="SAMLDS" URL="https://ds.qa.swamid.se/ds/${EXTRA_DS_PARAMS}"/>
             </SessionInitiator>
             <!-- FIDUS -->
             <SessionInitiator type="Chaining" Location="/DS/fidus" id="fidus">
                 <SessionInitiator type="SAML2" acsIndex="1" template="bindingTemplate.html"/>
-                <SessionInitiator type="SAMLDS" URL="https://ds.fidus.skolverket.se/ds/"/>
+                <SessionInitiator type="SAMLDS" URL="https://ds.fidus.skolverket.se/ds/${EXTRA_DS_PARAMS}"/>
             </SessionInitiator>
         </Sessions>
 
